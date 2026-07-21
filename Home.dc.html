@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#f4f1ea;font-family:'Archivo',sans-serif}
+  a{color:#ec008c}
+  a:hover{color:#c0006f}
+  @keyframes lp-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+</helmet>
+
+<div style="position:relative;overflow:hidden">
+
+  <!-- decorative spray blobs -->
+  <div style="position:absolute;top:-60px;right:-80px;width:420px;height:380px;background:radial-gradient(circle at 40% 40%, rgba(236,0,140,.22), transparent 65%);border-radius:42% 58% 65% 35%/45% 45% 55% 55%;transform:rotate(12deg);pointer-events:none;z-index:0"></div>
+  <div style="position:absolute;top:900px;left:-120px;width:360px;height:320px;background:radial-gradient(circle at 60% 40%, rgba(10,10,10,.08), transparent 70%);border-radius:55% 45% 40% 60%/50% 60% 40% 50%;pointer-events:none;z-index:0"></div>
+
+  <!-- NAV -->
+  <div style="position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background-color: #FDFDFD; width: 1469px; height: 89px; overflow: hidden">
+    <img src="assets/nav-splash-left.png" alt="" style="position:absolute;left:0;top:0;height:100%;width:160px;object-fit:cover;pointer-events:none;z-index:0">
+    <img src="assets/nav-splash-right.png" alt="" style="position:absolute;right:0;top:0;height:100%;width:160px;object-fit:cover;pointer-events:none;z-index:0">
+    <div style="display:flex;align-items:center;gap:12px;position:relative;z-index:1">
+      <img src="./chatgpt-image-17-jul-2026-18_23_09-mrpgf23r-yklz.png" alt="Bicicletería Laprida" style="width: 193px; height: 123px; object-fit: contain; border-radius: 4px">
+      
+    </div>
+    <div style="display: flex; gap: 34px; font: 700 12px 'Archivo',sans-serif; color: #000000; text-transform: uppercase; letter-spacing: .05em; width: 587px; height: 21px; background-color: #CCCCCC00; position: relative; z-index: 1">
+      <a href="#catalogo" style="color: #000000; text-decoration: none">Catálogo</a>
+      <a href="#noticias" style="color: #000000; text-decoration: none">Noticias</a>
+      <a href="#clientes" style="color: #000000; text-decoration: none">Clientes</a>
+      <a href="#contacto" style="color: #000000; text-decoration: none">Contacto</a>
+    </div>
+    <a href="https://wa.me/5493462000000" target="_blank" style="background:#ec008c;color:#fff;font:800 12px 'Archivo',sans-serif;padding:11px 20px;border-radius:2px;text-transform:uppercase;text-decoration:none;transform:rotate(-1deg);display:inline-block;position:relative;z-index:1">WhatsApp</a>
+  </div>
+
+  <!-- HERO -->
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:90px 48px 60px;text-align:center;z-index:1">
+    <div style="position:absolute;top:12px;right:60px;width:120px;height:120px;border-radius:50%;border:4px solid #0a0a0a;display:flex;align-items:center;justify-content:center;transform:rotate(-14deg);background:#fff;z-index:2">
+      <span style="font:800 12px/1.25 'Archivo',sans-serif;text-align:center;text-transform:uppercase">Distribuidor<br>Oficial<br>KTM</span>
+    </div>
+    <div style="font-family:'Anton',sans-serif;font-size:96px;line-height:.88;color:#0a0a0a;letter-spacing:.5px;transform:rotate(-1deg);max-width:820px;margin:0 auto">RODÁ<br><span style="color:#ec008c">DISTINTO</span></div>
+    <p style="font:600 17px/1.6 'Archivo',sans-serif;color:#333;max-width:520px;margin:26px auto 34px">Venta y reparación, accesorios, indumentaria y suplementos. Distribuidor oficial KTM en Venado Tuerto, Santa Fe.</p>
+    <div style="display:flex;gap:16px;justify-content:center">
+      <a href="#catalogo" style="background:#0a0a0a;color:#fff;font:800 13px 'Archivo',sans-serif;padding:16px 28px;border-radius:2px;text-transform:uppercase;text-decoration:none">Ver catálogo</a>
+      <a href="https://wa.me/5493462000000" target="_blank" style="background:#ec008c;color:#fff;font:800 13px 'Archivo',sans-serif;padding:16px 28px;border-radius:2px;text-transform:uppercase;text-decoration:none">Consultar ahora</a>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div style="background:#ec008c;padding:12px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:1">
+    <div style="display:inline-block;animation:lp-marquee 16s linear infinite;font:800 15px 'Archivo',sans-serif;color:#fff;text-transform:uppercase;letter-spacing:.08em">
+      ★ ENVÍOS A TODO EL PAÍS &nbsp; ★ DISTRIBUIDOR OFICIAL KTM &nbsp; ★ SERVICE TÉCNICO &nbsp; ★ VENTA Y REPARACIÓN &nbsp; ★ ENVÍOS A TODO EL PAÍS &nbsp; ★ DISTRIBUIDOR OFICIAL KTM &nbsp; ★ SERVICE TÉCNICO &nbsp; ★ VENTA Y REPARACIÓN &nbsp;
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div style="max-width:1240px;margin:56px auto 0;padding:0 48px;position:relative;z-index:1">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.1)">
+      <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="5">
+        <div style="background:#f4f1ea;padding:22px 10px;text-align:center;font:800 13px 'Archivo',sans-serif;text-transform:uppercase;letter-spacing:.03em">{{ cat.name }}</div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CATALOGO TEASER -->
+  <div id="catalogo" style="max-width:1240px;margin:0 auto;padding:90px 48px 40px;position:relative;z-index:1">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:12px">
+      <div style="font-family:'Anton',sans-serif;font-size:44px;color:#0a0a0a;transform:rotate(-1deg)">CATÁLOGO</div>
+      <a href="Catalogo.dc.html" style="font:800 13px 'Archivo',sans-serif;color:#ec008c;text-decoration:none;text-transform:uppercase">Ver catálogo completo →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+      <sc-for list="{{ catalogTeaser }}" as="p" hint-placeholder-count="6">
+        <div style="background:#fff;border:2px solid #0a0a0a">
+          <div style="aspect-ratio:4/3;border-bottom:2px solid #0a0a0a;overflow:hidden"><img src="{{ p.image }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="padding:16px 18px 20px">
+            <span style="display:inline-block;background:#0a0a0a;color:#fff;font:700 9px 'Archivo',sans-serif;padding:3px 9px;text-transform:uppercase;margin-bottom:8px">{{ p.category }}</span>
+            <div style="font:800 16px 'Archivo',sans-serif;color:#0a0a0a;margin-bottom:14px">{{ p.name }}</div>
+            <a href="https://wa.me/5493462000000" target="_blank" style="display:block;text-align:center;background:#ec008c;color:#fff;font:800 11.5px 'Archivo',sans-serif;padding:11px;text-transform:uppercase;text-decoration:none">Consultar por WhatsApp</a>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- NOTICIAS -->
+  <div id="noticias" style="background:#0a0a0a;margin-top:90px;padding:90px 48px;position:relative;z-index:1">
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="font-family:'Anton',sans-serif;font-size:44px;color:#fff;margin-bottom:36px;transform:rotate(-1deg)">CICLOTURISMO &amp; COMPETENCIAS</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+        <sc-for list="{{ news }}" as="n" hint-placeholder-count="3">
+          <div style="background:#161616;border-left:4px solid #ec008c;padding:22px">
+            <span style="display:inline-block;background:#ec008c;color:#fff;font:800 11px 'Archivo',sans-serif;padding:4px 10px;margin-bottom:14px;letter-spacing:.05em">{{ n.date }}</span>
+            <div style="font:800 18px 'Archivo',sans-serif;color:#fff;margin-bottom:8px">{{ n.title }}</div>
+            <div style="font:500 13px/1.6 'Archivo',sans-serif;color:#b8b8b8">{{ n.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIENTES -->
+  <div id="clientes" style="max-width:1240px;margin:0 auto;padding:90px 48px 40px;position:relative;z-index:1">
+    <div style="font-family:'Anton',sans-serif;font-size:44px;color:#0a0a0a;margin-bottom:36px">NUESTROS CLIENTES</div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px">
+      <sc-for list="{{ customers }}" as="c" hint-placeholder-count="6">
+        <div>
+          <div style="aspect-ratio:3/4;background:repeating-linear-gradient(135deg,#f0d9e6,#f0d9e6 8px,#e6b9d0 8px,#e6b9d0 16px);border:2px solid #0a0a0a;display:flex;align-items:center;justify-content:center;font:700 9px ui-monospace,monospace;color:#8a3c5f;text-align:center">FOTO CLIENTE</div>
+          <div style="font:700 10.5px 'Archivo',sans-serif;color:#0a0a0a;text-align:center;margin-top:8px;text-transform:uppercase">{{ c.caption }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="contacto" style="background:#0a0a0a;margin-top:60px;padding:56px 48px 34px;position:relative;z-index:1">
+    <div style="max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="uploads/logo.jpg" alt="Laprida" style="width:38px;height:38px;object-fit:contain;border-radius:4px">
+        <span style="font-family:'Anton',sans-serif;color:#fff;font-size:18px">LAPRIDA</span>
+      </div>
+      <div style="font:600 13px/1.9 'Archivo',sans-serif;color:#ccc">
+        Venado Tuerto, Santa Fe, Argentina<br>Envíos a todo el país 🇦🇷
+      </div>
+      <div style="font:700 13px/1.9 'Archivo',sans-serif">
+        <a href="https://www.instagram.com/bicicleteria_laprida/" target="_blank" style="color:#ec008c;text-decoration:none;display:block">@bicicleteria_laprida</a>
+        <a href="https://wa.me/5493462000000" target="_blank" style="color:#fff;text-decoration:none;display:block">Consultar por WhatsApp</a>
+      </div>
+    </div>
+    <div style="max-width:1240px;margin:34px auto 0;padding-top:20px;border-top:1px solid #262626;font:500 11px 'Archivo',sans-serif;color:#666">© 2026 Bicicletería Laprida — Distribuidor Oficial KTM</div>
+  </div>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/5493462000000" target="_blank" style="position:fixed;bottom:28px;right:28px;z-index:60;background:#ec008c;color:#fff;font:800 12px 'Archivo',sans-serif;padding:16px 22px;border-radius:30px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.35);text-transform:uppercase">WhatsApp</a>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const STORAGE_KEY = 'laprida_catalog_v1';
+
+class Component extends DCLogic {
+  state = {
+    categories: ['Bicicletas', 'Repuestos', 'Accesorios', 'Indumentaria', 'Suplementos'],
+    catalogTeaser: [
+      { name: 'KTM Aro 29 MTB', category: 'Bicicletas', image: 'assets/ktm-aro29-mtb.jpg' },
+      { name: 'KTM Aro 27.5 Trail', category: 'Bicicletas', image: 'assets/ktm-aro275-trail.jpg' },
+      { name: 'Casco integral', category: 'Accesorios', image: 'assets/casco-integral.jpg' },
+      { name: 'Zapatillas clip', category: 'Indumentaria', image: 'assets/zapatillas-clip.jpg' },
+      { name: 'Kit de transmisión', category: 'Repuestos', image: 'assets/kit-transmision.jpg' },
+      { name: 'Suplemento hidratación', category: 'Suplementos', image: 'assets/suplemento-hidratacion.jpg' }
+    ]
+  };
+
+  componentDidMount() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const d = JSON.parse(raw);
+      const next = {};
+      if (d.categories && d.categories.length) next.categories = d.categories;
+      if (d.products && d.products.length) next.catalogTeaser = d.products.slice(0, 6);
+      this.setState(next);
+    } catch (e) {}
+  }
+
+  renderVals() {
+    return {
+      categories: this.state.categories.map(name => ({ name })),
+      catalogTeaser: this.state.catalogTeaser,
+      news: [
+        { date: '20 JUL', title: 'Cicloturismo nocturno', desc: 'Venado Tuerto → San Eduardo. Salida grupal con acompañamiento.' },
+        { date: '03 AGO', title: 'Competencia MTB', desc: 'Inscripción abierta, cupos limitados. Categorías por edad y nivel.' },
+        { date: 'SEPT', title: 'Regreso al cole', desc: 'Service y revisión de frenos y cambios para bicis escolares.' }
+      ],
+      customers: [
+        { caption: 'MTB Aro 29' },
+        { caption: 'Bici de ruta' },
+        { caption: 'Indumentaria' },
+        { caption: 'Casco + guantes' },
+        { caption: 'Bici urbana' },
+        { caption: 'Service' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

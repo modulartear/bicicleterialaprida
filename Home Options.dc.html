@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#efece6;font-family:'Archivo',sans-serif}
+  @keyframes lp-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes lp-pulse{0%,100%{box-shadow:0 0 18px 2px rgba(255,45,150,.55)}50%{box-shadow:0 0 32px 8px rgba(255,45,150,.85)}}
+  @keyframes lp-scan{0%{background-position:0 0}100%{background-position:0 40px}}
+</style>
+</helmet>
+
+<section style="padding:40px 44px 60px;border-bottom:1px solid rgba(0,0,0,.08)">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <a href="#t1" style="font:700 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#0a0a0a;color:#fff;border-radius:4px;text-decoration:none">1</a>
+    <span style="font:600 13px/1.2 'Archivo',sans-serif;color:#1a1a1a">Home — 3 direcciones para Bicicletería Laprida</span>
+  </div>
+  <p style="font:400 12px/1.5 'Archivo',sans-serif;color:rgba(0,0,0,.55);margin:0 0 26px;max-width:640px">Mismo logo y contenido (KTM oficial, catálogo, cicloturismo/competiciones, envíos), tres sistemas visuales distintos. Cada card es un mock de home escaneable de arriba a abajo.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start">
+
+    <!-- ============ OPTION 1a — STREET POSTER (spray/graffiti) ============ -->
+    <div id="1a" style="display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+      <div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Archivo',sans-serif;color:rgba(0,0,0,.55)">
+        <a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1a</a>
+        Street Poster — spray, stencil, stamps
+      </div>
+      <div style="width:460px;max-width:100%;background:#f4f1ea;border:1px solid rgba(0,0,0,.08);border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden;position:relative">
+
+        <!-- spray blobs -->
+        <div style="position:absolute;top:-30px;right:-40px;width:180px;height:160px;background:radial-gradient(circle at 40% 40%, rgba(236,0,140,.35), transparent 65%);border-radius:42% 58% 65% 35%/45% 45% 55% 55%;transform:rotate(12deg);pointer-events:none"></div>
+        <div style="position:absolute;bottom:120px;left:-50px;width:160px;height:140px;background:radial-gradient(circle at 60% 40%, rgba(10,10,10,.18), transparent 70%);border-radius:55% 45% 40% 60%/50% 60% 40% 50%;pointer-events:none"></div>
+
+        <!-- nav -->
+        <div style="position:relative;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#0a0a0a">
+          <div style="display:flex;align-items:center;gap:8px">
+            <img src="uploads/logo.jpg" style="width:30px;height:30px;object-fit:contain;border-radius:3px" alt="Laprida">
+            <span style="font-family:'Anton',sans-serif;color:#fff;font-size:15px;letter-spacing:.5px">LAPRIDA</span>
+          </div>
+          <div style="display:flex;gap:14px;font:600 9px 'Archivo',sans-serif;color:#fff;text-transform:uppercase;letter-spacing:.06em">
+            <span>Catálogo</span><span>Noticias</span><span>Clientes</span>
+          </div>
+          <div style="background:#ec008c;color:#fff;font:700 9px 'Archivo',sans-serif;padding:6px 10px;border-radius:2px;text-transform:uppercase;transform:rotate(-2deg)">WhatsApp</div>
+        </div>
+
+        <!-- hero -->
+        <div style="position:relative;padding:34px 20px 28px;text-align:center">
+          <div style="position:absolute;top:-6px;right:6px;width:58px;height:58px;border-radius:50%;border:3px solid #0a0a0a;display:flex;align-items:center;justify-content:center;transform:rotate(-14deg);background:#fff;z-index:2">
+            <span style="font:800 6.5px/1.1 'Archivo',sans-serif;text-align:center;text-transform:uppercase">Distribuidor<br>Oficial<br>KTM</span>
+          </div>
+          <div style="font-family:'Anton',sans-serif;font-size:44px;line-height:.9;color:#0a0a0a;letter-spacing:.5px;transform:rotate(-1.5deg);max-width:250px;margin:0 auto">RODÁ<br><span style="color:#ec008c">DISTINTO</span></div>
+          <p style="font:600 11px/1.5 'Archivo',sans-serif;color:#333;max-width:300px;margin:14px auto 20px">Venta, reparación, indumentaria y repuestos. Venado Tuerto, Santa Fe.</p>
+          <div style="display:flex;gap:10px;justify-content:center">
+            <div style="background:#0a0a0a;color:#fff;font:700 10px 'Archivo',sans-serif;padding:10px 16px;border-radius:2px;text-transform:uppercase">Ver catálogo</div>
+            <div style="background:#ec008c;color:#fff;font:700 10px 'Archivo',sans-serif;padding:10px 16px;border-radius:2px;text-transform:uppercase">Consultar</div>
+          </div>
+        </div>
+
+        <!-- ribbon -->
+        <div style="background:#ec008c;padding:7px 0;overflow:hidden;white-space:nowrap">
+          <div style="display:inline-block;animation:lp-marquee 9s linear infinite;font:800 10px 'Archivo',sans-serif;color:#fff;text-transform:uppercase;letter-spacing:.08em">
+            ★ ENVÍOS A TODO EL PAÍS &nbsp; ★ DISTRIBUIDOR OFICIAL KTM &nbsp; ★ SERVICE TÉCNICO &nbsp; ★ ENVÍOS A TODO EL PAÍS &nbsp; ★ DISTRIBUIDOR OFICIAL KTM &nbsp; ★ SERVICE TÉCNICO &nbsp;
+          </div>
+        </div>
+
+        <!-- categories -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,0,0,.08);margin:16px 16px 0">
+          <div style="background:#f4f1ea;padding:10px 4px;text-align:center;font:700 8px 'Archivo',sans-serif;text-transform:uppercase">Bicicletas</div>
+          <div style="background:#f4f1ea;padding:10px 4px;text-align:center;font:700 8px 'Archivo',sans-serif;text-transform:uppercase">Repuestos</div>
+          <div style="background:#f4f1ea;padding:10px 4px;text-align:center;font:700 8px 'Archivo',sans-serif;text-transform:uppercase">Indumentaria</div>
+          <div style="background:#f4f1ea;padding:10px 4px;text-align:center;font:700 8px 'Archivo',sans-serif;text-transform:uppercase">Suplementos</div>
+        </div>
+
+        <!-- catalog teaser -->
+        <div style="padding:18px 16px 6px">
+          <div style="font-family:'Anton',sans-serif;font-size:16px;color:#0a0a0a;transform:rotate(-1deg);margin-bottom:10px">CATÁLOGO</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(45deg,#e3ddd0,#e3ddd0 6px,#d8d0be 6px,#d8d0be 12px);border:2px solid #0a0a0a;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#555;text-align:center">FOTO<br>BICI</div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(45deg,#e3ddd0,#e3ddd0 6px,#d8d0be 6px,#d8d0be 12px);border:2px solid #0a0a0a;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#555;text-align:center">FOTO<br>CASCO</div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(45deg,#e3ddd0,#e3ddd0 6px,#d8d0be 6px,#d8d0be 12px);border:2px solid #0a0a0a;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#555;text-align:center">FOTO<br>INDUM.</div>
+          </div>
+        </div>
+
+        <!-- news -->
+        <div style="padding:16px 16px 6px">
+          <div style="font-family:'Anton',sans-serif;font-size:16px;color:#0a0a0a;margin-bottom:10px">CICLOTURISMO &amp; COMPETENCIAS</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;gap:8px;align-items:center;background:#0a0a0a;padding:8px;border-radius:2px">
+              <div style="width:34px;height:34px;background:#ec008c;flex:none"></div>
+              <div><div style="font:700 9px 'Archivo',sans-serif;color:#fff">Cicloturismo nocturno</div><div style="font:500 8px 'Archivo',sans-serif;color:#ccc">Venado Tuerto → San Eduardo</div></div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;background:#0a0a0a;padding:8px;border-radius:2px">
+              <div style="width:34px;height:34px;background:#ec008c;flex:none"></div>
+              <div><div style="font:700 9px 'Archivo',sans-serif;color:#fff">Inscripción competencia MTB</div><div style="font:500 8px 'Archivo',sans-serif;color:#ccc">Cupos limitados</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- customers -->
+        <div style="padding:16px 16px 4px">
+          <div style="font-family:'Anton',sans-serif;font-size:16px;color:#0a0a0a;margin-bottom:10px">NUESTROS CLIENTES</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+            <div style="aspect-ratio:3/4;background:repeating-linear-gradient(135deg,#f0d9e6,#f0d9e6 6px,#e6b9d0 6px,#e6b9d0 12px);border-radius:2px;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#7a3;color:#8a3c5f;text-align:center">FOTO<br>CLIENTE</div>
+            <div style="aspect-ratio:3/4;background:repeating-linear-gradient(135deg,#f0d9e6,#f0d9e6 6px,#e6b9d0 6px,#e6b9d0 12px);border-radius:2px;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#8a3c5f;text-align:center">FOTO<br>CLIENTE</div>
+            <div style="aspect-ratio:3/4;background:repeating-linear-gradient(135deg,#f0d9e6,#f0d9e6 6px,#e6b9d0 6px,#e6b9d0 12px);border-radius:2px;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#8a3c5f;text-align:center">FOTO<br>CLIENTE</div>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div style="background:#0a0a0a;padding:14px 16px;margin-top:16px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font:600 8px 'Archivo',sans-serif;color:#ccc">Venado Tuerto, Santa Fe</span>
+          <span style="font:700 8px 'Archivo',sans-serif;color:#ec008c">@bicicleteria_laprida</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ OPTION 1b — NEON URBAN (dark/glow) ============ -->
+    <div id="1b" style="display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+      <div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Archivo',sans-serif;color:rgba(0,0,0,.55)">
+        <a href="#1b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1b</a>
+        Neon Urban — dark, glow, técnico
+      </div>
+      <div style="width:460px;max-width:100%;background:#0b0b0e;border:1px solid rgba(0,0,0,.3);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.3);overflow:hidden;position:relative;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px, transparent 1px 40px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px, transparent 1px 40px)">
+
+        <!-- nav -->
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(255,255,255,.03);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,45,150,.25)">
+          <div style="display:flex;align-items:center;gap:8px">
+            <img src="uploads/logo.jpg" style="width:28px;height:28px;object-fit:contain;border-radius:6px" alt="Laprida">
+            <span style="font-family:'Anton',sans-serif;color:#fff;font-size:14px;letter-spacing:1px">LAPRIDA</span>
+          </div>
+          <div style="display:flex;gap:13px;font:600 8.5px 'Archivo',sans-serif;color:#c9c9d3;text-transform:uppercase;letter-spacing:.08em">
+            <span>Catálogo</span><span>Noticias</span><span>Clientes</span>
+          </div>
+        </div>
+
+        <!-- hero -->
+        <div style="position:relative;padding:36px 22px 30px;text-align:center">
+          <div style="display:inline-block;font:700 8px 'Archivo',sans-serif;color:#ff2d96;border:1px solid #ff2d96;border-radius:20px;padding:4px 10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px">Distribuidor oficial KTM</div>
+          <div style="font-family:'Anton',sans-serif;font-size:42px;line-height:.95;color:#fff;letter-spacing:.5px;text-shadow:0 0 18px rgba(255,45,150,.65),0 0 40px rgba(255,45,150,.35)">BICICLETERÍA<br><span style="color:#ff2d96">LAPRIDA</span></div>
+          <p style="font:500 11px/1.6 'Archivo',sans-serif;color:#9a9aa6;max-width:300px;margin:14px auto 22px">Venta y reparación · accesorios · indumentaria · suplementos. Envíos a todo el país.</p>
+          <div style="display:flex;gap:10px;justify-content:center">
+            <div style="background:linear-gradient(135deg,#ff2d96,#c0119f);color:#fff;font:700 10px 'Archivo',sans-serif;padding:11px 18px;border-radius:6px;text-transform:uppercase;animation:lp-pulse 2.6s ease-in-out infinite">Ver catálogo</div>
+            <div style="background:transparent;border:1px solid #444;color:#fff;font:700 10px 'Archivo',sans-serif;padding:11px 18px;border-radius:6px;text-transform:uppercase">WhatsApp</div>
+          </div>
+        </div>
+
+        <!-- categories -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 18px 22px">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:10px 4px;text-align:center;font:700 7.5px 'Archivo',sans-serif;color:#e6e6ec;text-transform:uppercase">Bicicletas</div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:10px 4px;text-align:center;font:700 7.5px 'Archivo',sans-serif;color:#e6e6ec;text-transform:uppercase">Repuestos</div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:10px 4px;text-align:center;font:700 7.5px 'Archivo',sans-serif;color:#e6e6ec;text-transform:uppercase">Indumentaria</div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:10px 4px;text-align:center;font:700 7.5px 'Archivo',sans-serif;color:#e6e6ec;text-transform:uppercase">Suplementos</div>
+        </div>
+
+        <!-- catalog teaser -->
+        <div style="padding:0 18px 8px">
+          <div style="font-family:'Anton',sans-serif;font-size:15px;color:#fff;margin-bottom:10px;letter-spacing:.5px">CATÁLOGO</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#1a1a22,#26262f);border:1px solid rgba(255,45,150,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#8a8a96;text-align:center">FOTO<br>BICI</div>
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#1a1a22,#26262f);border:1px solid rgba(255,45,150,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#8a8a96;text-align:center">FOTO<br>CASCO</div>
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#1a1a22,#26262f);border:1px solid rgba(255,45,150,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#8a8a96;text-align:center">FOTO<br>INDUM.</div>
+          </div>
+        </div>
+
+        <!-- news -->
+        <div style="padding:16px 18px 8px">
+          <div style="font-family:'Anton',sans-serif;font-size:15px;color:#fff;margin-bottom:10px;letter-spacing:.5px">CICLOTURISMO &amp; COMPETENCIAS</div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="display:flex;gap:9px;align-items:center;background:rgba(255,255,255,.04);border-left:2px solid #ff2d96;padding:9px 10px;border-radius:4px">
+              <div><div style="font:700 9px 'Archivo',sans-serif;color:#fff">Cicloturismo nocturno</div><div style="font:500 8px 'Archivo',sans-serif;color:#9a9aa6">Venado Tuerto → San Eduardo</div></div>
+            </div>
+            <div style="display:flex;gap:9px;align-items:center;background:rgba(255,255,255,.04);border-left:2px solid #ff2d96;padding:9px 10px;border-radius:4px">
+              <div><div style="font:700 9px 'Archivo',sans-serif;color:#fff">Inscripción competencia MTB</div><div style="font:500 8px 'Archivo',sans-serif;color:#9a9aa6">Cupos limitados</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- customers -->
+        <div style="padding:16px 18px 4px">
+          <div style="font-family:'Anton',sans-serif;font-size:15px;color:#fff;margin-bottom:10px;letter-spacing:.5px">NUESTROS CLIENTES</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+            <div style="aspect-ratio:3/4;background:linear-gradient(135deg,#241a22,#33212c);border:1px solid rgba(255,45,150,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#a68;text-align:center">FOTO<br>CLIENTE</div>
+            <div style="aspect-ratio:3/4;background:linear-gradient(135deg,#241a22,#33212c);border:1px solid rgba(255,45,150,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#a68;text-align:center">FOTO<br>CLIENTE</div>
+            <div style="aspect-ratio:3/4;background:linear-gradient(135deg,#241a22,#33212c);border:1px solid rgba(255,45,150,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#a68;text-align:center">FOTO<br>CLIENTE</div>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div style="padding:16px 18px;margin-top:16px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center">
+          <span style="font:600 8px 'Archivo',sans-serif;color:#7c7c88">Venado Tuerto, Santa Fe</span>
+          <span style="font:700 8px 'Archivo',sans-serif;color:#ff2d96">@bicicleteria_laprida</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ OPTION 1c — BOLD BLOCKS (swiss/geometric) ============ -->
+    <div id="1c" style="display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+      <div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Archivo',sans-serif;color:rgba(0,0,0,.55)">
+        <a href="#1c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1c</a>
+        Bold Blocks — swiss, geométrico, alto contraste
+      </div>
+      <div style="width:460px;max-width:100%;background:#fff;border:2px solid #0a0a0a;overflow:hidden">
+
+        <!-- nav -->
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:2px solid #0a0a0a">
+          <div style="display:flex;align-items:center;gap:8px">
+            <img src="uploads/logo.jpg" style="width:26px;height:26px;object-fit:contain" alt="Laprida">
+            <span style="font-family:'Anton',sans-serif;color:#0a0a0a;font-size:14px">LAPRIDA</span>
+          </div>
+          <div style="display:flex;gap:14px;font:700 8.5px 'Archivo',sans-serif;color:#0a0a0a;text-transform:uppercase">
+            <span>Catálogo</span><span>Noticias</span><span>Clientes</span>
+          </div>
+        </div>
+
+        <!-- hero grid -->
+        <div style="display:grid;grid-template-columns:2fr 1fr">
+          <div style="padding:28px 18px;border-right:2px solid #0a0a0a">
+            <div style="font-family:'Anton',sans-serif;font-size:38px;line-height:.92;color:#0a0a0a">TU BICI.<br>TU RITMO.</div>
+            <p style="font:600 10.5px/1.6 'Archivo',sans-serif;color:#333;margin:14px 0 18px;max-width:230px">Venta, reparación, accesorios, indumentaria y suplementos. Distribuidor oficial KTM.</p>
+            <div style="display:flex;gap:8px">
+              <div style="background:#0a0a0a;color:#fff;font:700 9.5px 'Archivo',sans-serif;padding:10px 14px;text-transform:uppercase">Catálogo</div>
+              <div style="background:#ec008c;color:#fff;font:700 9.5px 'Archivo',sans-serif;padding:10px 14px;text-transform:uppercase">WhatsApp</div>
+            </div>
+          </div>
+          <div style="background:#ec008c;display:flex;align-items:center;justify-content:center;padding:18px">
+            <span style="font-family:'Anton',sans-serif;font-size:15px;color:#fff;text-align:center;line-height:1.3;transform:rotate(90deg);white-space:nowrap">DISTRIB. OFICIAL KTM</span>
+          </div>
+        </div>
+
+        <!-- categories -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid #0a0a0a;border-bottom:2px solid #0a0a0a">
+          <div style="padding:9px 4px;text-align:center;font:700 8px 'Archivo',sans-serif;color:#0a0a0a;text-transform:uppercase;border-right:1px solid #0a0a0a">Bicicletas</div>
+          <div style="padding:9px 4px;text-align:center;font:700 8px 'Archivo',sans-serif;color:#0a0a0a;text-transform:uppercase;border-right:1px solid #0a0a0a">Repuestos</div>
+          <div style="padding:9px 4px;text-align:center;font:700 8px 'Archivo',sans-serif;color:#0a0a0a;text-transform:uppercase;border-right:1px solid #0a0a0a">Indumentaria</div>
+          <div style="padding:9px 4px;text-align:center;font:700 8px 'Archivo',sans-serif;color:#0a0a0a;text-transform:uppercase">Suplementos</div>
+        </div>
+
+        <!-- catalog teaser -->
+        <div style="padding:18px 18px 6px">
+          <div style="font-family:'Anton',sans-serif;font-size:16px;color:#0a0a0a;margin-bottom:10px">CATÁLOGO</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid #0a0a0a">
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(45deg,#f2f2f2,#f2f2f2 6px,#e2e2e2 6px,#e2e2e2 12px);border-right:2px solid #0a0a0a;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#555;text-align:center">FOTO<br>BICI</div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(45deg,#f2f2f2,#f2f2f2 6px,#e2e2e2 6px,#e2e2e2 12px);border-right:2px solid #0a0a0a;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#555;text-align:center">FOTO<br>CASCO</div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(45deg,#f2f2f2,#f2f2f2 6px,#e2e2e2 6px,#e2e2e2 12px);display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#555;text-align:center">FOTO<br>INDUM.</div>
+          </div>
+        </div>
+
+        <!-- news -->
+        <div style="padding:16px 18px 6px">
+          <div style="font-family:'Anton',sans-serif;font-size:16px;color:#0a0a0a;margin-bottom:10px">CICLOTURISMO &amp; COMPETENCIAS</div>
+          <div style="display:flex;flex-direction:column;gap:0;border:2px solid #0a0a0a">
+            <div style="display:flex;justify-content:space-between;padding:9px 10px;border-bottom:1px solid #0a0a0a">
+              <span style="font:700 9px 'Archivo',sans-serif;color:#0a0a0a">Cicloturismo nocturno</span>
+              <span style="font:600 8px 'Archivo',sans-serif;color:#ec008c">Ver más →</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:9px 10px">
+              <span style="font:700 9px 'Archivo',sans-serif;color:#0a0a0a">Competencia MTB — inscripción</span>
+              <span style="font:600 8px 'Archivo',sans-serif;color:#ec008c">Ver más →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- customers -->
+        <div style="padding:16px 18px 4px">
+          <div style="font-family:'Anton',sans-serif;font-size:16px;color:#0a0a0a;margin-bottom:10px">NUESTROS CLIENTES</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid #0a0a0a">
+            <div style="aspect-ratio:3/4;background:repeating-linear-gradient(135deg,#fbe3ef,#fbe3ef 6px,#f4c6de 6px,#f4c6de 12px);border-right:2px solid #0a0a0a;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#8a3c5f;text-align:center">FOTO<br>CLIENTE</div>
+            <div style="aspect-ratio:3/4;background:repeating-linear-gradient(135deg,#fbe3ef,#fbe3ef 6px,#f4c6de 6px,#f4c6de 12px);border-right:2px solid #0a0a0a;display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#8a3c5f;text-align:center">FOTO<br>CLIENTE</div>
+            <div style="aspect-ratio:3/4;background:repeating-linear-gradient(135deg,#fbe3ef,#fbe3ef 6px,#f4c6de 6px,#f4c6de 12px);display:flex;align-items:center;justify-content:center;font:600 6px ui-monospace,monospace;color:#8a3c5f;text-align:center">FOTO<br>CLIENTE</div>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div style="background:#0a0a0a;padding:14px 18px;margin-top:16px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font:600 8px 'Archivo',sans-serif;color:#ccc">Venado Tuerto, Santa Fe</span>
+          <span style="font:700 8px 'Archivo',sans-serif;color:#ec008c">@bicicleteria_laprida</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="margin:22px 0 0;font:12px/1.5 'Archivo',sans-serif;color:rgba(0,0,0,.5)">Probá: "seguí con <a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1a</a>" · "mezclá el fondo oscuro de <a href="#1b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1b</a> con la grilla de <a href="#1c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1c</a>" · "armá la home completa a partir de una opción"</p>
+</section>
+
+</x-dc>
+</body>
+</html>

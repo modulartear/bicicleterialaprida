@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#f4f1ea;font-family:'Archivo',sans-serif}
+  a{color:#ec008c}
+  a:hover{color:#c0006f}
+</style>
+</helmet>
+
+<div>
+  <!-- NAV -->
+  <div style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:#0a0a0a">
+    <a href="Home.dc.html" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+      <img src="uploads/logo.jpg" alt="Bicicletería Laprida" style="width:44px;height:44px;object-fit:contain;border-radius:4px">
+      <span style="font-family:'Anton',sans-serif;color:#fff;font-size:22px;letter-spacing:.5px">LAPRIDA</span>
+    </a>
+    <a href="Home.dc.html" style="font:700 12px 'Archivo',sans-serif;color:#fff;text-transform:uppercase;letter-spacing:.05em;text-decoration:none">← Inicio</a>
+    <a href="https://wa.me/5493462000000" target="_blank" style="background:#ec008c;color:#fff;font:800 12px 'Archivo',sans-serif;padding:11px 20px;border-radius:2px;text-transform:uppercase;text-decoration:none;transform:rotate(-1deg);display:inline-block">WhatsApp</a>
+  </div>
+
+  <!-- HEADER -->
+  <div style="max-width:1240px;margin:0 auto;padding:64px 48px 20px;text-align:center">
+    <div style="font-family:'Anton',sans-serif;font-size:60px;color:#0a0a0a;transform:rotate(-1deg)">CATÁLOGO</div>
+    <p style="font:600 15px 'Archivo',sans-serif;color:#333;max-width:520px;margin:14px auto 0">Distribuidor oficial KTM. Consultá precio y disponibilidad por WhatsApp — sin vueltas.</p>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div style="max-width:1240px;margin:0 auto;padding:30px 48px 0;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+      <div onClick="{{ t.select }}" style="cursor:pointer;padding:10px 20px;font:800 12px 'Archivo',sans-serif;text-transform:uppercase;border:2px solid #0a0a0a;background:{{ t.bg }};color:{{ t.fg }}">{{ t.name }}</div>
+    </sc-for>
+  </div>
+
+  <!-- GRID -->
+  <div style="max-width:1240px;margin:0 auto;padding:40px 48px 100px">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px">
+      <sc-for list="{{ filteredProducts }}" as="p" hint-placeholder-count="8">
+        <div style="background:#fff;border:2px solid #0a0a0a">
+<div style="aspect-ratio:1;border-bottom:2px solid #0a0a0a;overflow:hidden"><img src="{{ p.image }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="padding:14px 16px 18px">
+            <span style="display:inline-block;background:#0a0a0a;color:#fff;font:700 8.5px 'Archivo',sans-serif;padding:3px 8px;text-transform:uppercase;margin-bottom:8px">{{ p.category }}</span>
+            <div style="font:800 14px 'Archivo',sans-serif;color:#0a0a0a;margin-bottom:12px;min-height:34px">{{ p.name }}</div>
+            <a href="https://wa.me/5493462000000" target="_blank" style="display:block;text-align:center;background:#ec008c;color:#fff;font:800 10.5px 'Archivo',sans-serif;padding:10px;text-transform:uppercase;text-decoration:none">Consultar por WhatsApp</a>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:60px 0;font:600 14px 'Archivo',sans-serif;color:#666">No hay productos en esta categoría por ahora.</div>
+    </sc-if>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#0a0a0a;padding:56px 48px 34px">
+    <div style="max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="uploads/logo.jpg" alt="Laprida" style="width:38px;height:38px;object-fit:contain;border-radius:4px">
+        <span style="font-family:'Anton',sans-serif;color:#fff;font-size:18px">LAPRIDA</span>
+      </div>
+      <div style="font:600 13px/1.9 'Archivo',sans-serif;color:#ccc">Venado Tuerto, Santa Fe, Argentina<br>Envíos a todo el país 🇦🇷</div>
+      <div style="font:700 13px/1.9 'Archivo',sans-serif">
+        <a href="https://www.instagram.com/bicicleteria_laprida/" target="_blank" style="color:#ec008c;text-decoration:none;display:block">@bicicleteria_laprida</a>
+        <a href="https://wa.me/5493462000000" target="_blank" style="color:#fff;text-decoration:none;display:block">Consultar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://wa.me/5493462000000" target="_blank" style="position:fixed;bottom:28px;right:28px;z-index:60;background:#ec008c;color:#fff;font:800 12px 'Archivo',sans-serif;padding:16px 22px;border-radius:30px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.35);text-transform:uppercase">WhatsApp</a>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const STORAGE_KEY = 'laprida_catalog_v1';
+const PLACEHOLDER_IMG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="#e3ddd0"/></svg>');
+
+class Component extends DCLogic {
+  state = { active: 'Todos', categoryList: ['Todos', 'Bicicletas', 'Repuestos', 'Accesorios', 'Indumentaria', 'Suplementos'], products: null };
+
+  componentDidMount() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const d = JSON.parse(raw);
+      const next = {};
+      if (d.categories && d.categories.length) next.categoryList = ['Todos', ...d.categories];
+      if (d.products && d.products.length) next.products = d.products.map(p => ({ ...p, noImage: !p.image }));
+      this.setState(next);
+    } catch (e) {}
+  }
+
+  defaultProducts = [
+    { name: 'KTM Aro 29 MTB', category: 'Bicicletas', image: 'assets/ktm-aro29-mtb.jpg' },
+    { name: 'KTM Aro 27.5 Trail', category: 'Bicicletas', image: 'assets/ktm-aro275-trail.jpg' },
+    { name: 'Bici urbana rodado 26', category: 'Bicicletas', noImage: true },
+    { name: 'Bici de ruta aluminio', category: 'Bicicletas', noImage: true },
+    { name: 'Kit de transmisión', category: 'Repuestos', image: 'assets/kit-transmision.jpg' },
+    { name: 'Cámara y cubierta', category: 'Repuestos', noImage: true },
+    { name: 'Frenos a disco', category: 'Repuestos', noImage: true },
+    { name: 'Cadena reforzada', category: 'Repuestos', noImage: true },
+    { name: 'Casco integral', category: 'Accesorios', image: 'assets/casco-integral.jpg' },
+    { name: 'Luces delantera/trasera', category: 'Accesorios', noImage: true },
+    { name: 'Portaequipaje', category: 'Accesorios', noImage: true },
+    { name: 'Botellero + caramañola', category: 'Accesorios', noImage: true },
+    { name: 'Zapatillas clip', category: 'Indumentaria', image: 'assets/zapatillas-clip.jpg' },
+    { name: 'Guantes largos', category: 'Indumentaria', noImage: true },
+    { name: 'Remera ciclismo', category: 'Indumentaria', noImage: true },
+    { name: 'Suplemento hidratación', category: 'Suplementos', image: 'assets/suplemento-hidratacion.jpg' },
+    { name: 'Barritas energéticas', category: 'Suplementos', noImage: true }
+  ];
+
+  renderVals() {
+    const active = this.state.active;
+    const products = this.state.products || this.defaultProducts;
+    const categoryList = this.state.categoryList;
+    const filtered = active === 'Todos' ? products : products.filter(p => p.category === active);
+    return {
+      tabs: categoryList.map(name => ({
+        name,
+        select: () => this.setState({ active: name }),
+        bg: name === active ? '#0a0a0a' : '#f4f1ea',
+        fg: name === active ? '#fff' : '#0a0a0a'
+      })),
+      filteredProducts: filtered.map(p => ({ ...p, image: p.image || PLACEHOLDER_IMG })),
+      noResults: filtered.length === 0
+    };
+  }
+}
+
+</script>
+</body>
+</html>

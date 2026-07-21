@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#f4f1ea;font-family:'Archivo',sans-serif}
+  a{color:#ec008c}
+  a:hover{color:#c0006f}
+</style>
+</helmet>
+
+<div style="display:flex;min-height:100vh">
+
+  <!-- SIDEBAR -->
+  <div style="width:220px;flex:none;background:#0a0a0a;padding:24px 0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh">
+    <div style="display:flex;align-items:center;gap:10px;padding:0 22px 26px">
+      <img src="uploads/logo.jpg" alt="Laprida" style="width:34px;height:34px;object-fit:contain;border-radius:4px">
+      <span style="font-family:'Anton',sans-serif;color:#fff;font-size:16px">ADMIN</span>
+    </div>
+    <sc-for list="{{ navItems }}" as="nav" hint-placeholder-count="4">
+      <div onClick="{{ nav.onClick }}" style="cursor:pointer;padding:13px 22px;font:700 12px 'Archivo',sans-serif;text-transform:uppercase;letter-spacing:.04em;color:{{ nav.fg }};background:{{ nav.bg }};border-left:3px solid {{ nav.border }}">{{ nav.label }}</div>
+    </sc-for>
+    <div style="margin-top:auto;padding:16px 22px;border-top:1px solid #222">
+      <a href="Home.dc.html" style="color:#888;font:600 11px 'Archivo',sans-serif;text-decoration:none">← Ver sitio</a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div style="flex:1;padding:40px 48px;max-width:1100px">
+
+    <!-- PRODUCTOS -->
+    <sc-if value="{{ isProductos }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:26px">
+        <div style="font-family:'Anton',sans-serif;font-size:32px;color:#0a0a0a">PRODUCTOS</div>
+        <div onClick="{{ toggleForm }}" style="cursor:pointer;background:#ec008c;color:#fff;font:800 12px 'Archivo',sans-serif;padding:12px 20px;text-transform:uppercase">{{ formToggleLabel }}</div>
+      </div>
+
+      <sc-if value="{{ showForm }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border:2px solid #0a0a0a;padding:24px;margin-bottom:30px;display:flex;flex-direction:column;gap:14px">
+          <div style="font:800 13px 'Archivo',sans-serif;text-transform:uppercase;color:#0a0a0a">{{ formTitle }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:700 10px 'Archivo',sans-serif;text-transform:uppercase;color:#666">Nombre</label>
+              <input value="{{ form.name }}" onChange="{{ setName }}" style="border:2px solid #0a0a0a;padding:10px;font:600 13px 'Archivo',sans-serif">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:700 10px 'Archivo',sans-serif;text-transform:uppercase;color:#666">Categoría</label>
+              <select value="{{ form.category }}" onChange="{{ setCategory }}" style="border:2px solid #0a0a0a;padding:10px;font:600 13px 'Archivo',sans-serif">
+                <sc-for list="{{ categories }}" as="c" hint-placeholder-count="5">
+                  <option value="{{ c }}">{{ c }}</option>
+                </sc-for>
+              </select>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:700 10px 'Archivo',sans-serif;text-transform:uppercase;color:#666">Marca</label>
+              <select value="{{ form.brand }}" onChange="{{ setBrand }}" style="border:2px solid #0a0a0a;padding:10px;font:600 13px 'Archivo',sans-serif">
+                <sc-for list="{{ brands }}" as="b" hint-placeholder-count="5">
+                  <option value="{{ b }}">{{ b }}</option>
+                </sc-for>
+              </select>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:700 10px 'Archivo',sans-serif;text-transform:uppercase;color:#666">Imagen</label>
+              <input type="file" accept="image/*" onChange="{{ setImage }}" style="font:500 11px 'Archivo',sans-serif">
+            </div>
+          </div>
+          <img src="{{ form.image }}" style="width:110px;height:110px;object-fit:cover;border:2px solid #0a0a0a;display:{{ imagePreviewDisplay }}">
+          <div style="display:flex;gap:10px;margin-top:4px">
+            <div onClick="{{ saveProduct }}" style="cursor:pointer;background:#0a0a0a;color:#fff;font:800 12px 'Archivo',sans-serif;padding:11px 22px;text-transform:uppercase">Guardar</div>
+            <div onClick="{{ cancelForm }}" style="cursor:pointer;background:#eee;color:#0a0a0a;font:800 12px 'Archivo',sans-serif;padding:11px 22px;text-transform:uppercase">Cancelar</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;flex-direction:column;gap:0;border:2px solid #0a0a0a">
+        <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-bottom:1px solid #ddd">
+            <img src="{{ p.image }}" style="width:52px;height:52px;object-fit:cover;border:1px solid #0a0a0a;flex:none">
+            <div style="flex:1">
+              <div style="font:800 13px 'Archivo',sans-serif;color:#0a0a0a">{{ p.name }}</div>
+              <div style="font:600 10.5px 'Archivo',sans-serif;color:#888">{{ p.category }} · {{ p.brand }}</div>
+            </div>
+            <div onClick="{{ p.edit }}" style="cursor:pointer;font:700 11px 'Archivo',sans-serif;color:#ec008c;text-transform:uppercase">Editar</div>
+            <div onClick="{{ p.remove }}" style="cursor:pointer;font:700 11px 'Archivo',sans-serif;color:#999;text-transform:uppercase">Eliminar</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- CATEGORIAS -->
+    <sc-if value="{{ isCategorias }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:'Anton',sans-serif;font-size:32px;color:#0a0a0a;margin-bottom:26px">CATEGORÍAS</div>
+      <div style="display:flex;gap:10px;margin-bottom:24px">
+        <input value="{{ newCategory }}" onChange="{{ setNewCategory }}" placeholder="Nueva categoría" style="flex:1;border:2px solid #0a0a0a;padding:11px;font:600 13px 'Archivo',sans-serif">
+        <div onClick="{{ addCategory }}" style="cursor:pointer;background:#ec008c;color:#fff;font:800 12px 'Archivo',sans-serif;padding:12px 22px;text-transform:uppercase">Agregar</div>
+      </div>
+      <div style="display:flex;flex-direction:column;border:2px solid #0a0a0a">
+        <sc-for list="{{ categoryRows }}" as="c" hint-placeholder-count="5">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:13px 18px;border-bottom:1px solid #ddd">
+            <span style="font:700 13px 'Archivo',sans-serif;color:#0a0a0a;text-transform:uppercase">{{ c.name }}</span>
+            <div onClick="{{ c.remove }}" style="cursor:pointer;font:700 11px 'Archivo',sans-serif;color:#999;text-transform:uppercase">Eliminar</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- MARCAS -->
+    <sc-if value="{{ isMarcas }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:'Anton',sans-serif;font-size:32px;color:#0a0a0a;margin-bottom:26px">MARCAS</div>
+      <div style="display:flex;gap:10px;margin-bottom:24px">
+        <input value="{{ newBrand }}" onChange="{{ setNewBrand }}" placeholder="Nueva marca" style="flex:1;border:2px solid #0a0a0a;padding:11px;font:600 13px 'Archivo',sans-serif">
+        <div onClick="{{ addBrand }}" style="cursor:pointer;background:#ec008c;color:#fff;font:800 12px 'Archivo',sans-serif;padding:12px 22px;text-transform:uppercase">Agregar</div>
+      </div>
+      <div style="display:flex;flex-direction:column;border:2px solid #0a0a0a">
+        <sc-for list="{{ brandRows }}" as="b" hint-placeholder-count="5">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:13px 18px;border-bottom:1px solid #ddd">
+            <span style="font:700 13px 'Archivo',sans-serif;color:#0a0a0a;text-transform:uppercase">{{ b.name }}</span>
+            <div onClick="{{ b.remove }}" style="cursor:pointer;font:700 11px 'Archivo',sans-serif;color:#999;text-transform:uppercase">Eliminar</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <p style="margin-top:40px;font:500 11px/1.6 'Archivo',sans-serif;color:#999">Los cambios se guardan automáticamente y se reflejan en Home y Catálogo al recargarlos.</p>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const STORAGE_KEY = 'laprida_catalog_v1';
+const PLACEHOLDER_IMG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="#e3ddd0"/></svg>');
+
+class Component extends DCLogic {
+  state = {
+    view: 'productos',
+    categories: ['Bicicletas', 'Repuestos', 'Accesorios', 'Indumentaria', 'Suplementos'],
+    brands: ['KTM', 'Shimano', 'Totem', 'Northwave', 'ENA'],
+    products: [
+      { id: 1, name: 'KTM Aro 29 MTB', category: 'Bicicletas', brand: 'KTM', image: 'assets/ktm-aro29-mtb.jpg' },
+      { id: 2, name: 'KTM Aro 27.5 Trail', category: 'Bicicletas', brand: 'KTM', image: 'assets/ktm-aro275-trail.jpg' },
+      { id: 3, name: 'Casco integral', category: 'Accesorios', brand: 'Totem', image: 'assets/casco-integral.jpg' },
+      { id: 4, name: 'Zapatillas clip', category: 'Indumentaria', brand: 'Northwave', image: 'assets/zapatillas-clip.jpg' },
+      { id: 5, name: 'Kit de transmisión', category: 'Repuestos', brand: 'Shimano', image: 'assets/kit-transmision.jpg' },
+      { id: 6, name: 'Suplemento hidratación', category: 'Suplementos', brand: 'ENA', image: 'assets/suplemento-hidratacion.jpg' }
+    ],
+    showForm: false,
+    editingId: null,
+    form: { name: '', category: '', brand: '', image: '' },
+    newCategory: '',
+    newBrand: ''
+  };
+
+  componentDidMount() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const d = JSON.parse(raw);
+        this.setState({
+          categories: d.categories || this.state.categories,
+          brands: d.brands || this.state.brands,
+          products: d.products || this.state.products
+        });
+      } else {
+        this.persist();
+      }
+    } catch (e) {}
+  }
+
+  persist(partial) {
+    const next = { ...this.state, ...partial };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        categories: next.categories,
+        brands: next.brands,
+        products: next.products
+      }));
+    } catch (e) {}
+  }
+
+  toggleForm = () => {
+    if (this.state.showForm) return this.cancelForm();
+    this.setState({
+      showForm: true,
+      editingId: null,
+      form: { name: '', category: this.state.categories[0] || '', brand: this.state.brands[0] || '', image: '' }
+    });
+  };
+  cancelForm = () => this.setState({ showForm: false, editingId: null });
+
+  setName = e => this.setState({ form: { ...this.state.form, name: e.target.value } });
+  setCategory = e => this.setState({ form: { ...this.state.form, category: e.target.value } });
+  setBrand = e => this.setState({ form: { ...this.state.form, brand: e.target.value } });
+  setImage = e => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => this.setState({ form: { ...this.state.form, image: reader.result } });
+    reader.readAsDataURL(file);
+  };
+
+  saveProduct = () => {
+    const { form, editingId, products } = this.state;
+    if (!form.name.trim()) return;
+    let next;
+    if (editingId != null) {
+      next = products.map(p => p.id === editingId ? { ...p, ...form } : p);
+    } else {
+      const id = Math.max(0, ...products.map(p => p.id)) + 1;
+      next = [...products, { id, ...form }];
+    }
+    this.setState({ products: next, showForm: false, editingId: null });
+    this.persist({ products: next });
+  };
+
+  editProduct = id => {
+    const p = this.state.products.find(x => x.id === id);
+    if (!p) return;
+    this.setState({ showForm: true, editingId: id, form: { name: p.name, category: p.category, brand: p.brand || '', image: p.image || '' } });
+  };
+  removeProduct = id => {
+    const next = this.state.products.filter(p => p.id !== id);
+    this.setState({ products: next });
+    this.persist({ products: next });
+  };
+
+  setNewCategory = e => this.setState({ newCategory: e.target.value });
+  addCategory = () => {
+    const v = this.state.newCategory.trim();
+    if (!v || this.state.categories.includes(v)) return;
+    const next = [...this.state.categories, v];
+    this.setState({ categories: next, newCategory: '' });
+    this.persist({ categories: next });
+  };
+  removeCategory = name => {
+    const next = this.state.categories.filter(c => c !== name);
+    this.setState({ categories: next });
+    this.persist({ categories: next });
+  };
+
+  setNewBrand = e => this.setState({ newBrand: e.target.value });
+  addBrand = () => {
+    const v = this.state.newBrand.trim();
+    if (!v || this.state.brands.includes(v)) return;
+    const next = [...this.state.brands, v];
+    this.setState({ brands: next, newBrand: '' });
+    this.persist({ brands: next });
+  };
+  removeBrand = name => {
+    const next = this.state.brands.filter(b => b !== name);
+    this.setState({ brands: next });
+    this.persist({ brands: next });
+  };
+
+  setView = v => this.setState({ view: v, showForm: false });
+
+  renderVals() {
+    const view = this.state.view;
+    return {
+      isProductos: view === 'productos',
+      isCategorias: view === 'categorias',
+      isMarcas: view === 'marcas',
+      navItems: [
+        { label: 'Productos', onClick: () => this.setView('productos'), bg: view === 'productos' ? '#1a1a1a' : 'transparent', fg: view === 'productos' ? '#fff' : '#999', border: view === 'productos' ? '#ec008c' : 'transparent' },
+        { label: 'Categorías', onClick: () => this.setView('categorias'), bg: view === 'categorias' ? '#1a1a1a' : 'transparent', fg: view === 'categorias' ? '#fff' : '#999', border: view === 'categorias' ? '#ec008c' : 'transparent' },
+        { label: 'Marcas', onClick: () => this.setView('marcas'), bg: view === 'marcas' ? '#1a1a1a' : 'transparent', fg: view === 'marcas' ? '#fff' : '#999', border: view === 'marcas' ? '#ec008c' : 'transparent' }
+      ],
+      categories: this.state.categories,
+      brands: this.state.brands,
+      products: this.state.products.map(p => ({ ...p, image: p.image || PLACEHOLDER_IMG, edit: () => this.editProduct(p.id), remove: () => this.removeProduct(p.id) })),
+      categoryRows: this.state.categories.map(c => ({ name: c, remove: () => this.removeCategory(c) })),
+      brandRows: this.state.brands.map(b => ({ name: b, remove: () => this.removeBrand(b) })),
+      showForm: this.state.showForm,
+      formTitle: this.state.editingId != null ? 'Editar producto' : 'Nuevo producto',
+      formToggleLabel: this.state.showForm ? 'Cerrar' : '+ Nuevo producto',
+      form: { ...this.state.form, image: this.state.form.image || PLACEHOLDER_IMG },
+      imagePreviewDisplay: this.state.form.image ? 'block' : 'none',
+      newCategory: this.state.newCategory,
+      newBrand: this.state.newBrand
+    };
+  }
+}
+
+</script>
+</body>
+</html>
