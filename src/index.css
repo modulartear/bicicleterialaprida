@@ -223,6 +223,7 @@ img {
 }
 
 .landing-hero,
+.landing-hero-slider,
 .landing-section,
 .catalog-hero,
 .catalog-tabs,
@@ -238,6 +239,152 @@ img {
   margin: 0 auto;
   padding: 90px 48px 60px;
   text-align: center;
+}
+
+.landing-hero-slider {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 34px 48px 24px;
+}
+
+.landing-badge-slider {
+  top: 56px;
+  right: 80px;
+  z-index: 3;
+}
+
+.landing-hero-slider-viewport {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0a0a0a;
+}
+
+.landing-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.landing-hero-slide-active {
+  opacity: 1;
+}
+
+.landing-hero-slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.landing-hero-slider-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.18) 40%, rgba(0, 0, 0, 0.28) 100%);
+  z-index: 1;
+}
+
+.landing-hero-slider-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.landing-hero-slide-kicker {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.landing-hero-slider-content h1 {
+  margin: 0;
+  max-width: 720px;
+  color: #fff;
+  font-family: 'Anton', sans-serif;
+  font-size: 64px;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.landing-hero-slider-content p {
+  max-width: 520px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.landing-hero-actions-slider {
+  margin-top: 10px;
+}
+
+.button-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(4px);
+}
+
+.landing-hero-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: rgba(255, 255, 255, 0.86);
+  color: #0a0a0a;
+  font-size: 30px;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+
+.landing-hero-nav-prev {
+  left: 12px;
+}
+
+.landing-hero-nav-next {
+  right: 12px;
+}
+
+.landing-hero-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.landing-hero-dot {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.2);
+}
+
+.landing-hero-dot-active {
+  background: #ec008c;
 }
 
 .landing-badge {
@@ -821,6 +968,18 @@ img {
   line-height: 1.7;
 }
 
+.admin-subtitle {
+  color: #0a0a0a;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.admin-hero-slides-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .admin-login-card button {
   width: 100%;
   margin-top: 18px;
@@ -945,6 +1104,16 @@ img {
   border-left: 4px solid #ec008c;
   background: #fff;
   color: #0a0a0a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-error-banner {
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-left: 4px solid #b0005f;
+  background: #fff1f7;
+  color: #8b004a;
   font-size: 12px;
   font-weight: 700;
 }
@@ -1113,6 +1282,22 @@ img {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .landing-hero-slider {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .landing-hero-slider-viewport {
+    min-height: 480px;
+  }
+
+  .landing-badge-slider {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    margin: 0;
+  }
+
   .site-header-nav {
     flex-wrap: wrap;
     white-space: normal;
@@ -1166,6 +1351,24 @@ img {
 
   .landing-hero-title {
     font-size: 52px;
+  }
+
+  .landing-hero-slider-viewport {
+    min-height: 420px;
+  }
+
+  .landing-hero-slider-content h1 {
+    font-size: 38px;
+  }
+
+  .landing-hero-slider-content p {
+    font-size: 14px;
+  }
+
+  .landing-hero-nav {
+    width: 34px;
+    height: 34px;
+    font-size: 24px;
   }
 
   .catalog-hero h1,

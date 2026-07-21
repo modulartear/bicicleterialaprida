@@ -43,6 +43,11 @@ const sortByOrder = <T extends { order: number }>(items: T[]) =>
   [...items].sort((left, right) => left.order - right.order)
 
 const cloneSeed = (): SiteContent => JSON.parse(JSON.stringify(siteSeed))
+const normalizeSettings = (settings?: Partial<SiteSettings>): SiteSettings => ({
+  ...cloneSeed().settings,
+  ...settings,
+  heroSlides: sortByOrder(settings?.heroSlides || cloneSeed().settings.heroSlides).slice(0, 3),
+})
 
 const parseDocs = <T>(snapshot: { docs: Array<{ id: string; data: () => unknown }> }) =>
   snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Record<string, unknown>) })) as T[]
@@ -79,7 +84,15 @@ export function saveLocalAdminCredentials(credentials: { username: string; passw
 export async function loadSiteContent(): Promise<SiteContent> {
   if (!firebaseEnabled || !firebaseDb) {
     const raw = localStorage.getItem(LOCAL_CONTENT_KEY)
-    return raw ? (JSON.parse(raw) as SiteContent) : cloneSeed()
+    if (!raw) {
+      return cloneSeed()
+    }
+
+    const parsed = JSON.parse(raw) as SiteContent
+    return {
+      ...parsed,
+      settings: normalizeSettings(parsed.settings),
+    }
   }
 
   const [settingsDoc, categoriesDocs, brandsDocs, productsDocs, newsDocs, customersDocs] =
@@ -95,7 +108,7 @@ export async function loadSiteContent(): Promise<SiteContent> {
   const settingsRecord = settingsDoc.docs[0]?.data() as SiteSettings | undefined
 
   return {
-    settings: settingsRecord || cloneSeed().settings,
+    settings: normalizeSettings(settingsRecord),
     categories: sortByOrder(parseDocs<Category>(categoriesDocs)),
     brands: sortByOrder(parseDocs<Brand>(brandsDocs)),
     products: sortByOrder(parseDocs<Product>(productsDocs)),

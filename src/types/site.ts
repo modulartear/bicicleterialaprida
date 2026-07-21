@@ -1,3 +1,14 @@
+export type HeroSlide = {
+  id: string
+  imageUrl: string
+  title: string
+  subtitle: string
+  ctaLabel: string
+  ctaHref: string
+  visible: boolean
+  order: number
+}
+
 export type SiteSettings = {
   brandName: string
   brandShortName: string
@@ -26,6 +37,7 @@ export type SiteSettings = {
   newsCtaLabel: string
   customersTitle: string
   adminAccessLabel: string
+  heroSlides: HeroSlide[]
 }
 
 export type Category = {

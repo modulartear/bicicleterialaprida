@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { HeroSlider } from '@/components/site/HeroSlider'
 import { PublicHeader } from '@/components/site/PublicHeader'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { SiteFooter } from '@/components/site/SiteFooter'
@@ -16,7 +17,6 @@ export default function LandingPage() {
   const news = content.news.filter((item) => item.visible).slice(0, 3)
   const customers = content.customers.filter((item) => item.visible).slice(0, 6)
   const { settings } = content
-  const primaryIsExternal = /^https?:\/\//.test(settings.heroPrimaryHref)
 
   return (
     <div className="landing-page">
@@ -26,42 +26,7 @@ export default function LandingPage() {
 
         <PublicHeader settings={settings} />
 
-        <section className="landing-hero">
-          <div className="landing-badge">
-            {settings.officialBadgeText.split(' ').map((part) => (
-              <span key={part}>{part}</span>
-            ))}
-          </div>
-
-          <div className="landing-hero-title">
-            {settings.heroTitle}
-            <br />
-            <span>{settings.heroHighlight}</span>
-          </div>
-
-          <p className="landing-hero-description">{settings.heroDescription}</p>
-
-          <div className="landing-hero-actions">
-            {primaryIsExternal ? (
-              <a className="button-dark" href={settings.heroPrimaryHref} target="_blank" rel="noreferrer">
-                {settings.heroPrimaryLabel}
-              </a>
-            ) : (
-              <Link className="button-dark" to={settings.heroPrimaryHref}>
-                {settings.heroPrimaryLabel}
-              </Link>
-            )}
-
-            <a
-              className="button-magenta"
-              href={settings.heroSecondaryHref}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {settings.heroSecondaryLabel}
-            </a>
-          </div>
-        </section>
+        <HeroSlider settings={settings} />
 
         <section className="landing-marquee">
           <div className="landing-marquee-track">
