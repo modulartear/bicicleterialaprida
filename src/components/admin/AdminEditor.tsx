@@ -31,6 +31,7 @@ export function AdminEditor() {
   const [accessDraft, setAccessDraft] = useState<AccessDraft>({ username: 'admin', password: '' })
   const [activeTab, setActiveTab] = useState<AdminTab>('branding')
   const [notice, setNotice] = useState<string | null>(null)
+  const [errorNotice, setErrorNotice] = useState<string | null>(null)
   const [uploadingKey, setUploadingKey] = useState<string | null>(null)
 
   useEffect(() => {
@@ -65,14 +66,26 @@ export function AdminEditor() {
   }
 
   const handleSave = async () => {
-    await save(draft)
+    setErrorNotice(null)
 
-    if (!firebaseEnabled) {
-      saveLocalAdminCredentials(accessDraft)
+    try {
+      await save(draft)
+
+      if (!firebaseEnabled) {
+        saveLocalAdminCredentials(accessDraft)
+      }
+
+      setNotice('Cambios guardados correctamente')
+      window.setTimeout(() => setNotice(null), 2500)
+    } catch (error) {
+      const rawMessage =
+        error instanceof Error ? error.message : 'No se pudo guardar en Firestore'
+      const readableMessage = rawMessage.includes('Missing or insufficient permissions')
+        ? 'Firebase rechazó la escritura. Revisá reglas de Firestore/Storage y que el email del admin esté autorizado.'
+        : rawMessage
+
+      setErrorNotice(readableMessage)
     }
-
-    setNotice('Cambios guardados correctamente')
-    window.setTimeout(() => setNotice(null), 2500)
   }
 
   const handleReset = async () => {
@@ -139,6 +152,20 @@ export function AdminEditor() {
       [collectionKey]: current[collectionKey].map((item) =>
         item.id === id ? { ...item, ...patch } : item,
       ),
+    }))
+
+  const updateHeroSlide = (
+    id: string,
+    patch: Partial<SiteContent['settings']['heroSlides'][number]>,
+  ) =>
+    updateDraft((current) => ({
+      ...current,
+      settings: {
+        ...current.settings,
+        heroSlides: current.settings.heroSlides.map((slide) =>
+          slide.id === id ? { ...slide, ...patch } : slide,
+        ),
+      },
     }))
 
   return (
@@ -222,6 +249,7 @@ export function AdminEditor() {
         </div>
 
         {notice ? <div className="admin-success-banner">{notice}</div> : null}
+        {errorNotice ? <div className="admin-error-banner">{errorNotice}</div> : null}
 
         {activeTab === 'branding' ? (
           <section className="admin-section admin-columns">
@@ -296,31 +324,36 @@ export function AdminEditor() {
 
             <div className="admin-card">
               <div className="admin-section-head">
-                <h2>Hero principal</h2>
+                <h2>Hero slider</h2>
+                <button
+                  disabled={draft.settings.heroSlides.length >= 3}
+                  onClick={() =>
+                    updateDraft((current) => ({
+                      ...current,
+                      settings: {
+                        ...current.settings,
+                        heroSlides: [
+                          ...current.settings.heroSlides,
+                          {
+                            id: uid('hero'),
+                            imageUrl: '/assets/ktm-aro29-mtb.jpg',
+                            title: 'Nuevo slide',
+                            subtitle: 'Texto descriptivo del hero',
+                            ctaLabel: 'Explorar',
+                            ctaHref: '/catalogo',
+                            visible: true,
+                            order: current.settings.heroSlides.length + 1,
+                          },
+                        ].slice(0, 3),
+                      },
+                    }))
+                  }
+                  type="button"
+                >
+                  + Slide
+                </button>
               </div>
 
-              <label>
-                Título superior
-                <input
-                  value={draft.settings.heroTitle}
-                  onChange={(event) => updateSettingsField('heroTitle', event.target.value)}
-                />
-              </label>
-              <label>
-                Título destacado
-                <input
-                  value={draft.settings.heroHighlight}
-                  onChange={(event) => updateSettingsField('heroHighlight', event.target.value)}
-                />
-              </label>
-              <label>
-                Descripción
-                <textarea
-                  value={draft.settings.heroDescription}
-                  onChange={(event) => updateSettingsField('heroDescription', event.target.value)}
-                  rows={4}
-                />
-              </label>
               <label>
                 Badge oficial
                 <input
@@ -329,21 +362,7 @@ export function AdminEditor() {
                 />
               </label>
               <label>
-                CTA principal
-                <input
-                  value={draft.settings.heroPrimaryLabel}
-                  onChange={(event) => updateSettingsField('heroPrimaryLabel', event.target.value)}
-                />
-              </label>
-              <label>
-                Link CTA principal
-                <input
-                  value={draft.settings.heroPrimaryHref}
-                  onChange={(event) => updateSettingsField('heroPrimaryHref', event.target.value)}
-                />
-              </label>
-              <label>
-                CTA secundario
+                CTA secundario global
                 <input
                   value={draft.settings.heroSecondaryLabel}
                   onChange={(event) =>
@@ -352,7 +371,7 @@ export function AdminEditor() {
                 />
               </label>
               <label>
-                Link CTA secundario
+                Link CTA secundario global
                 <input
                   value={draft.settings.heroSecondaryHref}
                   onChange={(event) =>
@@ -360,6 +379,103 @@ export function AdminEditor() {
                   }
                 />
               </label>
+
+              <div className="admin-hero-slides-list">
+                {[...draft.settings.heroSlides]
+                  .sort((left, right) => left.order - right.order)
+                  .map((slide, index) => (
+                    <div key={slide.id} className="admin-stack-item">
+                      <strong className="admin-subtitle">Slide {index + 1}</strong>
+                      <img className="admin-card-image compact" src={slide.imageUrl} alt={slide.title} />
+                      <label>
+                        Imagen
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(event) =>
+                            withImageUpload(
+                              `hero-${slide.id}`,
+                              'branding',
+                              (imageUrl) => updateHeroSlide(slide.id, { imageUrl }),
+                              event.target.files?.[0],
+                            )
+                          }
+                        />
+                      </label>
+                      <label>
+                        Título
+                        <input
+                          value={slide.title}
+                          onChange={(event) => updateHeroSlide(slide.id, { title: event.target.value })}
+                        />
+                      </label>
+                      <label>
+                        Subtítulo
+                        <textarea
+                          value={slide.subtitle}
+                          onChange={(event) =>
+                            updateHeroSlide(slide.id, { subtitle: event.target.value })
+                          }
+                          rows={3}
+                        />
+                      </label>
+                      <label>
+                        Texto botón
+                        <input
+                          value={slide.ctaLabel}
+                          onChange={(event) =>
+                            updateHeroSlide(slide.id, { ctaLabel: event.target.value })
+                          }
+                        />
+                      </label>
+                      <label>
+                        Link botón
+                        <input
+                          value={slide.ctaHref}
+                          onChange={(event) =>
+                            updateHeroSlide(slide.id, { ctaHref: event.target.value })
+                          }
+                        />
+                      </label>
+                      <div className="admin-inline-row">
+                        <input
+                          value={slide.order}
+                          onChange={(event) =>
+                            updateHeroSlide(slide.id, { order: Number(event.target.value) || 0 })
+                          }
+                          type="number"
+                        />
+                        <label className="admin-checkbox compact">
+                          <input
+                            checked={slide.visible}
+                            onChange={(event) =>
+                              updateHeroSlide(slide.id, { visible: event.target.checked })
+                            }
+                            type="checkbox"
+                          />
+                          Visible
+                        </label>
+                        <button
+                          className="danger"
+                          onClick={() =>
+                            updateDraft((current) => ({
+                              ...current,
+                              settings: {
+                                ...current.settings,
+                                heroSlides: current.settings.heroSlides.filter(
+                                  (item) => item.id !== slide.id,
+                                ),
+                              },
+                            }))
+                          }
+                          type="button"
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
 
             <div className="admin-card">
@@ -985,8 +1101,8 @@ export function AdminEditor() {
               ) : (
                 <p className="admin-help-text">
                   En modo Firebase, el login usa usuario o email y contraseña. Si ingresás con
-                  usuario, se resuelve desde la colección `adminProfiles` con los campos `username`
-                  y `email`.
+                  usuario, se resuelve desde el documento <code>adminUsernames/{'{usuario}'}</code>{' '}
+                  con el campo <code>email</code>.
                 </p>
               )}
             </div>
