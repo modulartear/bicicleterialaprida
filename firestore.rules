@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in [
+          "REEMPLAZAR_POR_EMAIL_ADMIN"
+        ];
+    }
+
+    match /siteSettings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /categories/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /brands/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /products/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /news/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /customers/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /adminUsernames/{username} {
+      allow get: if true;
+      allow list: if false;
+      allow write: if isAdmin();
+    }
+  }
+}

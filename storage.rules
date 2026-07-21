@@ -1,0 +1,31 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in [
+          "REEMPLAZAR_POR_EMAIL_ADMIN"
+        ];
+    }
+
+    match /{allPaths=**} {
+      allow read: if true;
+    }
+
+    match /products/{fileName} {
+      allow write: if isAdmin() && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    match /customers/{fileName} {
+      allow write: if isAdmin() && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    match /news/{fileName} {
+      allow write: if isAdmin() && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    match /branding/{fileName} {
+      allow write: if isAdmin() && request.resource.size < 10 * 1024 * 1024;
+    }
+  }
+}

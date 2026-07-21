@@ -9,11 +9,9 @@ import {
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
-  limit,
-  query,
   setDoc,
-  where,
   writeBatch,
 } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
@@ -191,21 +189,14 @@ export async function signInAdmin(credentials: AdminCredentials) {
   let signInEmail = credentials.username
 
   if (!credentials.username.includes('@') && firebaseDb) {
-    const snapshot = await getDocs(
-      query(
-        collection(firebaseDb, 'adminProfiles'),
-        where('username', '==', credentials.username),
-        limit(1),
-      ),
-    )
+    const mapping = await getDoc(doc(firebaseDb, 'adminUsernames', credentials.username))
+    const data = mapping.exists() ? (mapping.data() as { email?: string } | undefined) : undefined
 
-    const profile = snapshot.docs[0]?.data() as { email?: string } | undefined
-
-    if (!profile?.email) {
+    if (!data?.email) {
       throw new Error('Usuario administrador no encontrado')
     }
 
-    signInEmail = profile.email
+    signInEmail = data.email
   }
 
   await setPersistence(firebaseAuth, browserLocalPersistence)
