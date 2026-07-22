@@ -1,18 +1,17 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ProductQuickView } from '@/components/site/ProductQuickView'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { useSiteStore } from '@/store/useSiteStore'
 
 export default function CatalogPage() {
   useDocumentTitle('Catálogo | Bicicletería Laprida')
+  const navigate = useNavigate()
   const content = useSiteStore((state) => state.content)
   const loading = useSiteStore((state) => state.loading)
 
   const { categories, products, settings } = content
   const [activeCategory, setActiveCategory] = useState('Todos')
-  const [selectedProductId, setSelectedProductId] = useState<string | null>(null)
 
   const tabs = useMemo(
     () => ['Todos', ...categories.filter((item) => item.visible).map((item) => item.name)],
@@ -27,11 +26,6 @@ export default function CatalogPage() {
 
     return visibleProducts.filter((item) => item.categoryName === activeCategory)
   }, [activeCategory, products])
-
-  const selectedProduct =
-    filteredProducts.find((item) => item.id === selectedProductId) ||
-    products.find((item) => item.id === selectedProductId) ||
-    null
 
   return (
     <div className="catalog-page">
@@ -73,13 +67,13 @@ export default function CatalogPage() {
           <article
             key={product.id}
             className="product-card catalog-product-card product-card-clickable"
-            onClick={() => setSelectedProductId(product.id)}
+            onClick={() => navigate(`/producto/${product.id}`)}
             role="button"
             tabIndex={0}
             onKeyDown={(event) => {
               if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault()
-                setSelectedProductId(product.id)
+                navigate(`/producto/${product.id}`)
               }
             }}
           >
@@ -90,7 +84,12 @@ export default function CatalogPage() {
               <span className="product-card-category">{product.categoryName}</span>
               <h3>{product.name}</h3>
               <p className="product-card-description">{product.description}</p>
-              <a href={settings.whatsappUrl} target="_blank" rel="noreferrer">
+              <a
+                href={settings.whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(event) => event.stopPropagation()}
+              >
                 {settings.whatsappLabel}
               </a>
             </div>
@@ -103,12 +102,6 @@ export default function CatalogPage() {
       </section>
 
       <SiteFooter settings={settings} />
-
-      <ProductQuickView
-        product={selectedProduct}
-        settings={settings}
-        onClose={() => setSelectedProductId(null)}
-      />
 
       <a className="floating-whatsapp" href={settings.whatsappUrl} target="_blank" rel="noreferrer">
         WhatsApp

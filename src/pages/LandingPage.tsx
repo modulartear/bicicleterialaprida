@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
-import { useMemo, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { HeroSlider } from '@/components/site/HeroSlider'
-import { ProductQuickView } from '@/components/site/ProductQuickView'
 import { PublicHeader } from '@/components/site/PublicHeader'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { SiteFooter } from '@/components/site/SiteFooter'
@@ -9,10 +8,10 @@ import { useSiteStore } from '@/store/useSiteStore'
 
 export default function LandingPage() {
   useDocumentTitle('Bicicletería Laprida')
+  const navigate = useNavigate()
   const content = useSiteStore((state) => state.content)
   const loading = useSiteStore((state) => state.loading)
   const error = useSiteStore((state) => state.error)
-  const [selectedProductId, setSelectedProductId] = useState<string | null>(null)
 
   const categories = content.categories.filter((item) => item.visible)
   const featuredProducts = content.products.filter((item) => item.visible && item.featured)
@@ -20,10 +19,6 @@ export default function LandingPage() {
   const news = content.news.filter((item) => item.visible).slice(0, 3)
   const customers = content.customers.filter((item) => item.visible).slice(0, 6)
   const { settings } = content
-  const selectedProduct = useMemo(
-    () => content.products.find((item) => item.id === selectedProductId) || null,
-    [content.products, selectedProductId],
-  )
 
   return (
     <div className="landing-page">
@@ -60,13 +55,13 @@ export default function LandingPage() {
               <article
                 key={product.id}
                 className="product-card product-card-clickable"
-                onClick={() => setSelectedProductId(product.id)}
+                onClick={() => navigate(`/producto/${product.id}`)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault()
-                    setSelectedProductId(product.id)
+                    navigate(`/producto/${product.id}`)
                   }
                 }}
               >
@@ -77,7 +72,12 @@ export default function LandingPage() {
                   <span className="product-card-category">{product.categoryName}</span>
                   <h3>{product.name}</h3>
                   <p className="product-card-description">{product.description}</p>
-                  <a href={settings.whatsappUrl} target="_blank" rel="noreferrer">
+                  <a
+                    href={settings.whatsappUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                  >
                     Consultar por WhatsApp
                   </a>
                 </div>
@@ -120,12 +120,6 @@ export default function LandingPage() {
         </section>
 
         <SiteFooter settings={settings} />
-
-        <ProductQuickView
-          product={selectedProduct}
-          settings={settings}
-          onClose={() => setSelectedProductId(null)}
-        />
 
         <a
           className="floating-whatsapp"

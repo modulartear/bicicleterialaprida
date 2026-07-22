@@ -5,6 +5,7 @@ import AdminDashboardPage from '@/pages/AdminDashboardPage'
 import AdminLoginPage from '@/pages/AdminLoginPage'
 import CatalogPage from '@/pages/CatalogPage'
 import LandingPage from '@/pages/LandingPage'
+import ProductDetailPage from '@/pages/ProductDetailPage'
 
 export default function App() {
   useBootstrap()
@@ -14,6 +15,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/catalogo" element={<CatalogPage />} />
+        <Route path="/producto/:productId" element={<ProductDetailPage />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route
           path="/admin"
