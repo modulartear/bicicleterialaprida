@@ -88,6 +88,9 @@ export const siteSeed: SiteContent = {
       brandId: 'brand-ktm',
       brandName: 'KTM',
       imageUrl: '/assets/ktm-aro29-mtb.jpg',
+      images: ['/assets/ktm-aro29-mtb.jpg'],
+      description:
+        'Mountain bike rodado 29 ideal para senderos, uso deportivo y salidas exigentes. Consultá disponibilidad, colores y talle desde WhatsApp.',
       featured: true,
       visible: true,
       order: 1,
@@ -100,6 +103,9 @@ export const siteSeed: SiteContent = {
       brandId: 'brand-ktm',
       brandName: 'KTM',
       imageUrl: '/assets/ktm-aro275-trail.jpg',
+      images: ['/assets/ktm-aro275-trail.jpg'],
+      description:
+        'Bicicleta trail versátil para ciudad y tierra, con cuadro liviano y componentes preparados para un uso intensivo.',
       featured: true,
       visible: true,
       order: 2,
@@ -112,6 +118,9 @@ export const siteSeed: SiteContent = {
       brandId: 'brand-totem',
       brandName: 'Totem',
       imageUrl: '/assets/casco-integral.jpg',
+      images: ['/assets/casco-integral.jpg'],
+      description:
+        'Casco integral con excelente protección y ajuste cómodo para salidas urbanas, MTB o uso recreativo.',
       featured: true,
       visible: true,
       order: 3,
@@ -124,6 +133,9 @@ export const siteSeed: SiteContent = {
       brandId: 'brand-northwave',
       brandName: 'Northwave',
       imageUrl: '/assets/zapatillas-clip.jpg',
+      images: ['/assets/zapatillas-clip.jpg'],
+      description:
+        'Zapatillas para pedales automáticos con suela rígida, buena ventilación y ajuste seguro para rutas largas.',
       featured: true,
       visible: true,
       order: 4,
@@ -136,6 +148,9 @@ export const siteSeed: SiteContent = {
       brandId: 'brand-shimano',
       brandName: 'Shimano',
       imageUrl: '/assets/kit-transmision.jpg',
+      images: ['/assets/kit-transmision.jpg'],
+      description:
+        'Kit de transmisión para mantenimiento o mejora de rendimiento, pensado para un pedaleo suave y preciso.',
       featured: true,
       visible: true,
       order: 5,
@@ -148,6 +163,9 @@ export const siteSeed: SiteContent = {
       brandId: 'brand-ena',
       brandName: 'ENA',
       imageUrl: '/assets/suplemento-hidratacion.jpg',
+      images: ['/assets/suplemento-hidratacion.jpg'],
+      description:
+        'Suplemento para hidratación y recuperación, ideal para entrenamientos prolongados y competencias.',
       featured: true,
       visible: true,
       order: 6,
@@ -159,6 +177,9 @@ export const siteSeed: SiteContent = {
       categoryName: 'Bicicletas',
       brandName: 'KTM',
       imageUrl: '/uploads/504344008_4122396454648490_1102516779843403957_n.jpg',
+      images: ['/uploads/504344008_4122396454648490_1102516779843403957_n.jpg'],
+      description:
+        'Bicicleta urbana cómoda y resistente, pensada para traslados diarios y uso recreativo con estética moderna.',
       featured: false,
       visible: true,
       order: 7,
@@ -170,6 +191,9 @@ export const siteSeed: SiteContent = {
       categoryName: 'Indumentaria',
       brandName: 'Northwave',
       imageUrl: '/uploads/503886951_4120603628161106_1000805326731450606_n.jpg',
+      images: ['/uploads/503886951_4120603628161106_1000805326731450606_n.jpg'],
+      description:
+        'Guantes largos con buen agarre, protección y confort para rodadas de media y larga distancia.',
       featured: false,
       visible: true,
       order: 8,

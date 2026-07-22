@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ProductQuickView } from '@/components/site/ProductQuickView'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { useSiteStore } from '@/store/useSiteStore'
@@ -11,6 +12,7 @@ export default function CatalogPage() {
 
   const { categories, products, settings } = content
   const [activeCategory, setActiveCategory] = useState('Todos')
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null)
 
   const tabs = useMemo(
     () => ['Todos', ...categories.filter((item) => item.visible).map((item) => item.name)],
@@ -25,6 +27,11 @@ export default function CatalogPage() {
 
     return visibleProducts.filter((item) => item.categoryName === activeCategory)
   }, [activeCategory, products])
+
+  const selectedProduct =
+    filteredProducts.find((item) => item.id === selectedProductId) ||
+    products.find((item) => item.id === selectedProductId) ||
+    null
 
   return (
     <div className="catalog-page">
@@ -63,13 +70,26 @@ export default function CatalogPage() {
 
       <section className="catalog-grid">
         {filteredProducts.map((product) => (
-          <article key={product.id} className="product-card catalog-product-card">
+          <article
+            key={product.id}
+            className="product-card catalog-product-card product-card-clickable"
+            onClick={() => setSelectedProductId(product.id)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault()
+                setSelectedProductId(product.id)
+              }
+            }}
+          >
             <div className="product-card-image-frame catalog-product-image">
-              <img src={product.imageUrl} alt={product.name} />
+              <img src={(product.images && product.images[0]) || product.imageUrl} alt={product.name} />
             </div>
             <div className="product-card-body">
               <span className="product-card-category">{product.categoryName}</span>
               <h3>{product.name}</h3>
+              <p className="product-card-description">{product.description}</p>
               <a href={settings.whatsappUrl} target="_blank" rel="noreferrer">
                 {settings.whatsappLabel}
               </a>
@@ -83,6 +103,12 @@ export default function CatalogPage() {
       </section>
 
       <SiteFooter settings={settings} />
+
+      <ProductQuickView
+        product={selectedProduct}
+        settings={settings}
+        onClose={() => setSelectedProductId(null)}
+      />
 
       <a className="floating-whatsapp" href={settings.whatsappUrl} target="_blank" rel="noreferrer">
         WhatsApp

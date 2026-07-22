@@ -48,6 +48,20 @@ const normalizeSettings = (settings?: Partial<SiteSettings>): SiteSettings => ({
   ...settings,
   heroSlides: sortByOrder(settings?.heroSlides || cloneSeed().settings.heroSlides).slice(0, 3),
 })
+const normalizeProduct = (product: Partial<Product>): Product => {
+  const images = (product.images?.filter(Boolean) || []).length
+    ? (product.images?.filter(Boolean) as string[])
+    : product.imageUrl
+      ? [product.imageUrl]
+      : []
+
+  return {
+    ...product,
+    imageUrl: images[0] || product.imageUrl || '/assets/casco-integral.jpg',
+    images,
+    description: product.description || '',
+  } as Product
+}
 
 const parseDocs = <T>(snapshot: { docs: Array<{ id: string; data: () => unknown }> }) =>
   snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Record<string, unknown>) })) as T[]
@@ -92,6 +106,7 @@ export async function loadSiteContent(): Promise<SiteContent> {
     return {
       ...parsed,
       settings: normalizeSettings(parsed.settings),
+      products: sortByOrder((parsed.products || []).map((product) => normalizeProduct(product))),
     }
   }
 
@@ -111,20 +126,26 @@ export async function loadSiteContent(): Promise<SiteContent> {
     settings: normalizeSettings(settingsRecord),
     categories: sortByOrder(parseDocs<Category>(categoriesDocs)),
     brands: sortByOrder(parseDocs<Brand>(brandsDocs)),
-    products: sortByOrder(parseDocs<Product>(productsDocs)),
+    products: sortByOrder(parseDocs<Product>(productsDocs).map((product) => normalizeProduct(product))),
     news: sortByOrder(parseDocs<NewsItem>(newsDocs)),
     customers: sortByOrder(parseDocs<CustomerItem>(customersDocs)),
   }
 }
 
 export async function saveSiteContent(content: SiteContent) {
+  const normalizedContent = {
+    ...content,
+    settings: normalizeSettings(content.settings),
+    products: sortByOrder(content.products.map((product) => normalizeProduct(product))),
+  }
+
   if (!firebaseEnabled || !firebaseDb) {
-    localStorage.setItem(LOCAL_CONTENT_KEY, JSON.stringify(content))
+    localStorage.setItem(LOCAL_CONTENT_KEY, JSON.stringify(normalizedContent))
     return
   }
 
   const batch = writeBatch(firebaseDb)
-  batch.set(doc(firebaseDb, 'siteSettings', 'main'), content.settings)
+  batch.set(doc(firebaseDb, 'siteSettings', 'main'), normalizedContent.settings)
 
   const syncCollection = async <T extends { id: string }>(name: string, items: T[]) => {
     const existing = await getDocs(collection(firebaseDb, name))
@@ -142,11 +163,11 @@ export async function saveSiteContent(content: SiteContent) {
   }
 
   await Promise.all([
-    syncCollection('categories', content.categories),
-    syncCollection('brands', content.brands),
-    syncCollection('products', content.products),
-    syncCollection('news', content.news),
-    syncCollection('customers', content.customers),
+    syncCollection('categories', normalizedContent.categories),
+    syncCollection('brands', normalizedContent.brands),
+    syncCollection('products', normalizedContent.products),
+    syncCollection('news', normalizedContent.news),
+    syncCollection('customers', normalizedContent.customers),
   ])
 
   await batch.commit()

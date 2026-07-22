@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
+import { useMemo, useState } from 'react'
 import { HeroSlider } from '@/components/site/HeroSlider'
+import { ProductQuickView } from '@/components/site/ProductQuickView'
 import { PublicHeader } from '@/components/site/PublicHeader'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { SiteFooter } from '@/components/site/SiteFooter'
@@ -10,6 +12,7 @@ export default function LandingPage() {
   const content = useSiteStore((state) => state.content)
   const loading = useSiteStore((state) => state.loading)
   const error = useSiteStore((state) => state.error)
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null)
 
   const categories = content.categories.filter((item) => item.visible)
   const featuredProducts = content.products.filter((item) => item.visible && item.featured)
@@ -17,6 +20,10 @@ export default function LandingPage() {
   const news = content.news.filter((item) => item.visible).slice(0, 3)
   const customers = content.customers.filter((item) => item.visible).slice(0, 6)
   const { settings } = content
+  const selectedProduct = useMemo(
+    () => content.products.find((item) => item.id === selectedProductId) || null,
+    [content.products, selectedProductId],
+  )
 
   return (
     <div className="landing-page">
@@ -50,13 +57,26 @@ export default function LandingPage() {
 
           <div className="landing-product-grid">
             {teaserProducts.map((product) => (
-              <article key={product.id} className="product-card">
+              <article
+                key={product.id}
+                className="product-card product-card-clickable"
+                onClick={() => setSelectedProductId(product.id)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault()
+                    setSelectedProductId(product.id)
+                  }
+                }}
+              >
                 <div className="product-card-image-frame">
-                  <img src={product.imageUrl} alt={product.name} />
+                  <img src={(product.images && product.images[0]) || product.imageUrl} alt={product.name} />
                 </div>
                 <div className="product-card-body">
                   <span className="product-card-category">{product.categoryName}</span>
                   <h3>{product.name}</h3>
+                  <p className="product-card-description">{product.description}</p>
                   <a href={settings.whatsappUrl} target="_blank" rel="noreferrer">
                     Consultar por WhatsApp
                   </a>
@@ -100,6 +120,12 @@ export default function LandingPage() {
         </section>
 
         <SiteFooter settings={settings} />
+
+        <ProductQuickView
+          product={selectedProduct}
+          settings={settings}
+          onClose={() => setSelectedProductId(null)}
+        />
 
         <a
           className="floating-whatsapp"

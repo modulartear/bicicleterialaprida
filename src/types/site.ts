@@ -62,6 +62,8 @@ export type Product = {
   brandId?: string
   brandName?: string
   imageUrl: string
+  images: string[]
+  description: string
   featured: boolean
   visible: boolean
   order: number

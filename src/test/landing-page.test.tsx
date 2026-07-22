@@ -23,6 +23,7 @@ describe('LandingPage', () => {
 
     expect(screen.getByText('SLP 500 PRO R29')).toBeInTheDocument()
     expect(screen.getByText('KTM Aro 29 MTB')).toBeInTheDocument()
+    expect(screen.getByText(/Mountain bike rodado 29 ideal/i)).toBeInTheDocument()
     expect(screen.getByText('Cicloturismo nocturno')).toBeInTheDocument()
   })
 })

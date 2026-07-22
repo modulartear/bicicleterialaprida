@@ -124,6 +124,14 @@ export function AdminEditor() {
       ),
     }))
 
+  const updateProduct = (id: string, patch: Partial<Product>) =>
+    updateDraft((current) => ({
+      ...current,
+      products: current.products.map((product) =>
+        product.id === id ? { ...product, ...patch } : product,
+      ),
+    }))
+
   const updateNews = (id: string, key: keyof NewsItem, value: string | boolean | number) =>
     updateDraft((current) => ({
       ...current,
@@ -601,6 +609,8 @@ export function AdminEditor() {
                         brandId: visibleBrands[0]?.id,
                         brandName: visibleBrands[0]?.name || '',
                         imageUrl: '/assets/casco-integral.jpg',
+                        images: ['/assets/casco-integral.jpg'],
+                        description: 'Descripción del producto',
                         featured: false,
                         visible: true,
                         order: current.products.length + 1,
@@ -669,6 +679,14 @@ export function AdminEditor() {
                     </select>
                   </label>
                   <label>
+                    Descripción
+                    <textarea
+                      value={product.description}
+                      onChange={(event) => updateProduct(product.id, { description: event.target.value })}
+                      rows={4}
+                    />
+                  </label>
+                  <label>
                     Orden
                     <input
                       value={product.order}
@@ -698,14 +716,80 @@ export function AdminEditor() {
                     />
                     Visible
                   </label>
+                  <div className="admin-product-gallery">
+                    {(product.images?.length ? product.images : [product.imageUrl]).map((imageUrl, index) => (
+                      <div key={`${product.id}-${index}`} className="admin-stack-item">
+                        <img className="admin-card-image compact" src={imageUrl} alt={`${product.name} ${index + 1}`} />
+                        <label>
+                          Imagen {index + 1}
+                          <input
+                            onChange={(event) =>
+                              withImageUpload(
+                                `product-${product.id}-${index}`,
+                                'products',
+                                (nextImageUrl) => {
+                                  const nextImages = [
+                                    ...(product.images?.length ? product.images : [product.imageUrl]),
+                                  ]
+                                  nextImages[index] = nextImageUrl
+                                  updateProduct(product.id, {
+                                    images: nextImages,
+                                    imageUrl: nextImages[0],
+                                  })
+                                },
+                                event.target.files?.[0],
+                              )
+                            }
+                            type="file"
+                            accept="image/*"
+                          />
+                        </label>
+                        <button
+                          className="danger"
+                          disabled={(product.images?.length || 1) <= 1}
+                          onClick={() => {
+                            const nextImages = [
+                              ...(product.images?.length ? product.images : [product.imageUrl]),
+                            ].filter((_, imageIndex) => imageIndex !== index)
+                            updateProduct(product.id, {
+                              images: nextImages,
+                              imageUrl: nextImages[0] || product.imageUrl,
+                            })
+                          }}
+                          type="button"
+                        >
+                          Eliminar imagen
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    className="secondary"
+                    disabled={(product.images?.length || 1) >= 6}
+                    onClick={() => {
+                      const baseImages = [
+                        ...(product.images?.length ? product.images : [product.imageUrl]),
+                      ]
+                      updateProduct(product.id, {
+                        images: [...baseImages, baseImages[0] || '/assets/casco-integral.jpg'],
+                      })
+                    }}
+                    type="button"
+                  >
+                    + Agregar imagen
+                  </button>
                   <label>
-                    Imagen
+                    Imagen principal rápida
                     <input
                       onChange={(event) =>
                         withImageUpload(
                           `product-${product.id}`,
                           'products',
-                          (imageUrl) => updateProductField(product.id, 'imageUrl', imageUrl),
+                          (imageUrl) =>
+                            updateProduct(product.id, {
+                              imageUrl,
+                              images: [imageUrl, ...(product.images || []).filter((item) => item !== imageUrl)],
+                            }),
                           event.target.files?.[0],
                         )
                       }
